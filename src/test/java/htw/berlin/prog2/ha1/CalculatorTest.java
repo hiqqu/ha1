@@ -107,5 +107,22 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should display result after addition of 1 single digit number with a multi digit number containing only the first digit")
+    void testSameNumberAddition(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+
+        String expected = "60";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
