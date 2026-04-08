@@ -14,6 +14,8 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private boolean isNewOperation = false;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -31,7 +33,10 @@ public class Calculator {
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if(screen.equals("0") || isNewOperation){
+            screen = "";
+            isNewOperation = false;
+        }
 
         screen = screen + digit;
     }
@@ -62,6 +67,7 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        isNewOperation = true;
     }
 
     /**
@@ -83,6 +89,7 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        isNewOperation = true;
 
     }
 
