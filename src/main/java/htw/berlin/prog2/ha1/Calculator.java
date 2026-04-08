@@ -16,6 +16,8 @@ public class Calculator {
 
     private boolean isNewOperation = false;
 
+    private boolean clearedOnce = false;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -39,6 +41,7 @@ public class Calculator {
         }
 
         screen = screen + digit;
+        clearedOnce = false;
     }
 
     /**
@@ -51,8 +54,13 @@ public class Calculator {
      */
     public void pressClearKey() {
         screen = "0";
+
+        if(clearedOnce){
         latestOperation = "";
         latestValue = 0.0;
+        }
+
+        clearedOnce = true;
     }
 
     /**
